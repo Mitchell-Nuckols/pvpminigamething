@@ -22,9 +22,14 @@ public class GameListener implements Listener {
 
             if(manager.isPlayerInLobby(attacker) && manager.isPlayerInLobby(attacked)) {
                 if(manager.getLobby(attacker).getId() == manager.getLobby(attacked).getId()) {
-                    if(manager.getLobby(attacker).getTeam(attacker) != manager.getLobby(attacked).getTeam(attacked)) {
+                    if(manager.getLobby(attacker).getTeam(attacker) == manager.getLobby(attacked).getTeam(attacked)) {
+                        event.setCancelled(true);
+                    }else {
                         manager.getLobby(attacker).broadcastMessage(attacker.getDisplayName() + " attacked " + attacked.getDisplayName() + " for " + event.getDamage());
+
                     }
+                }else {
+                    event.setCancelled(true);
                 }
             }
         }else {
