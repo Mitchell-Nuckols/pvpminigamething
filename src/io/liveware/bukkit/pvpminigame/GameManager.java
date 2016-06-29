@@ -13,11 +13,15 @@ public class GameManager {
     private ArrayList<GameLobby> lobbies;
     private int id = 0;
 
+    private int maxLobbies = 3;
+
     public GameManager() {
         lobbies = new ArrayList<GameLobby>();
     }
 
     public int createLobby() {
+        if(lobbies.size() >= maxLobbies) return -1;
+
         GameLobby lobby = new GameLobby(id);
         lobbies.add(lobby);
         id++;

@@ -13,3 +13,6 @@ commands:
    leave:
       description: Leave a lobby
       usage: /leave
+   drawcircle:
+      description: Because Voltz wanted it
+      usage: /drawcircle [radius]

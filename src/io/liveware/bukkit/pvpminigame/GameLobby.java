@@ -2,12 +2,17 @@ package io.liveware.bukkit.pvpminigame;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Mitchell on 6/28/2016.
@@ -35,6 +40,7 @@ public class GameLobby {
 
         for(UUID u : players.keySet()) {
             Player player = Bukkit.getPlayer(u);
+            player.getInventory().clear();
 
             if(teamSize(GameTeam.BLUE) > teamSize(GameTeam.RED)) {
                 players.put(u, GameTeam.RED);
@@ -43,6 +49,8 @@ public class GameLobby {
             }else {
                 players.put(u, GameTeam.RED);
             }
+
+            GameHelper.giveArmor(player, getTeam(player));
 
             player.sendMessage("You joined team " + (getTeam(player) == GameTeam.RED ? ChatColor.RED + "RED" : ChatColor.BLUE + "BLUE"));
             player.setDisplayName("[" + ChatColor.GOLD + "#" + this.id + ChatColor.RESET + "]" + (getTeam(player) == GameTeam.RED ? ChatColor.RED : ChatColor.BLUE) + player.getDisplayName() + ChatColor.RESET);
@@ -66,6 +74,7 @@ public class GameLobby {
         broadcastMessage("The score was " + ChatColor.RED + "RED" + ChatColor.RESET + ":" + ChatColor.GOLD + getPoints(GameTeam.RED) + ChatColor.RESET + " | " + ChatColor.BLUE + "BLUE" + ChatColor.RESET + ":" + ChatColor.GOLD + getPoints(GameTeam.BLUE));
 
         for(UUID u : players.keySet()) {
+            Bukkit.getPlayer(u).getInventory().clear();
             removePlayer(Bukkit.getPlayer(u));
         }
 
