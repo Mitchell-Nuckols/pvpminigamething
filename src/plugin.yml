@@ -1,0 +1,15 @@
+name: PvPMinigame
+main: io.liveware.bukkit.pvpminigame.PvPMinigame
+version: 0.01
+author: MitchIsAPerson
+description: PvP minigame plugin
+commands:
+   join:
+      description: Join a lobby
+      usage: /join [id]
+   create:
+      description: Create a lobby
+      usage: /create
+   leave:
+      description: Leave a lobby
+      usage: /leave
